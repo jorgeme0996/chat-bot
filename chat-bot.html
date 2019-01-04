@@ -44,7 +44,7 @@
         display: flex;
         flex-direction: column-reverse;
         align-content: flex-end;
-        height: 300px;
+        height: 400px;
       }
 
       user-message {
@@ -68,8 +68,8 @@
         </dom-repeat>
       </div>
 
-      <paper-button id="send" on-click="send">[[]]</paper-button>
-      <paper-button id="send" on-click="send">[[]]</paper-button>
+      <paper-button id="send" on-click="send">Prueba</paper-button>
+      <paper-button id="send" on-click="send">Prueba</paper-button>
     </paper-card>
   </template>
 
@@ -81,19 +81,15 @@
           messages: {
             type: Array,
             value: []
+          },
+          nodes: {
+            type: Array,
+            value: []
           }
         };
       }
 
-      checkEnter(event){
-        if(event.key == 'Enter'){
-          this.send()
-        }
-      }
-
-      send(){
-        console.log(this.text);
-      }
+      
 
     }
 
