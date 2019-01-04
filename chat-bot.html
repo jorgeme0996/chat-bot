@@ -50,10 +50,6 @@
       user-message {
         padding: 5px;
       }
-
-      user-message.user {
-        align-self: flex-end;
-      }
     </style>
 
     <paper-card>
@@ -63,7 +59,7 @@
       <div id="chat">
         <dom-repeat items="[[messages]]" as="message">
           <template>
-            <user-message class="user" text="[[message]]"></user-message>
+            <user-message class="bot" text="[[message]]"></user-message>
           </template>
         </dom-repeat>
       </div>
@@ -89,7 +85,10 @@
         };
       }
 
-      
+      ready() {
+        super.ready();
+        this.messages.push('Bienvenido, tendras una interacción con un chatbot');
+      } 
 
     }
 
