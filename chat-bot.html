@@ -1,0 +1,102 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="./message-component.html">
+<link rel="import" href="../user-message/user-message.html">
+
+<dom-module id="chat-bot">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-card{
+        position: relative;
+        height: 500px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        margin: 30px;
+      }
+      paper-input{
+        --paper-input-container-focus-color: var(--paper-green-500);
+        position: absolute;
+        width: 90%;
+        left: 0;
+        bottom: 0;
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+      paper-button#send{
+        background-color: var(--paper-green-500);
+        color: white;
+        margin-bottom: 2px;
+      }
+
+      header{
+        background-color: #0288D1;
+        color: white;
+        padding-left: 30px;
+      }
+
+      div#chat{
+        display: flex;
+        flex-direction: column-reverse;
+        align-content: flex-end;
+        height: 300px;
+      }
+
+      user-message {
+        padding: 5px;
+      }
+
+      user-message.user {
+        align-self: flex-end;
+      }
+    </style>
+
+    <paper-card>
+      <header>
+        <h1>I'm a bot</h1>
+      </header>
+      <div id="chat">
+        <dom-repeat items="[[messages]]" as="message">
+          <template>
+            <user-message class="user" text="[[message]]"></user-message>
+          </template>
+        </dom-repeat>
+      </div>
+
+      <paper-button id="send" on-click="send">[[]]</paper-button>
+      <paper-button id="send" on-click="send">[[]]</paper-button>
+    </paper-card>
+  </template>
+
+  <script>
+    class ChatBot extends Polymer.Element {
+      static get is() { return 'chat-bot'; }
+      static get properties() {
+        return {
+          messages: {
+            type: Array,
+            value: []
+          }
+        };
+      }
+
+      checkEnter(event){
+        if(event.key == 'Enter'){
+          this.send()
+        }
+      }
+
+      send(){
+        console.log(this.text);
+      }
+
+    }
+
+    window.customElements.define(ChatBot.is, ChatBot);
+  </script>
+</dom-module>
