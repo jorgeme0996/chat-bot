@@ -64,7 +64,7 @@
             <div class="buttons">
               <paper-button class="button" on-click="">Yes</paper-button>
               <paper-button class="button" on-click="">No</paper-button>
-            </div> 
+            </div>
           </template>
         </dom-repeat>
       </div>
@@ -85,13 +85,13 @@
 
     ready() {
       super.ready();
-      const newNode = new Node();
+      const newNode = new Polymer.Node();
       newNode.question = 'Bienvenido, esta es una interacción con un bot. ¿Aceptas?';
       newNode.from = 'bot';
-      newNode.options.set('yes', new Node());
+      newNode.options.set('yes', new Polymer.Node());
       console.log(newNode);
-      this.nodes.push(newNode);  
-    } 
+      this.nodes.push(newNode);
+    }
 
   }
 
