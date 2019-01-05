@@ -2,8 +2,8 @@
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-card/paper-card.html">
-<link rel="import" href="./message-component.html">
 <link rel="import" href="../user-message/user-message.html">
+<script src="./models/Node.js"></script>
 
 <dom-module id="chat-bot">
   <template>
@@ -28,27 +28,28 @@
         margin-left: 5%;
         margin-right: 5%;
       }
-      paper-button#send{
+      paper-button.button{
         background-color: var(--paper-green-500);
         color: white;
         margin-bottom: 2px;
       }
-
       header{
         background-color: #0288D1;
         color: white;
         padding-left: 30px;
       }
-
       div#chat{
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         align-content: flex-end;
         height: 400px;
       }
-
-      user-message {
+      user-message{
         padding: 5px;
+      }
+
+      div.buttons{
+        display: flex;
       }
     </style>
 
@@ -57,41 +58,43 @@
         <h1>I'm a bot</h1>
       </header>
       <div id="chat">
-        <dom-repeat items="[[messages]]" as="message">
+        <dom-repeat items="[[nodes]]" as="node">
           <template>
-            <user-message class="bot" text="[[message]]"></user-message>
+            <user-message id="message" text="[[node.question]]" from="[[node.from]]"></user-message>
+            <div class="buttons">
+              <paper-button class="button" on-click="">Yes</paper-button>
+              <paper-button class="button" on-click="">No</paper-button>
+            </div> 
           </template>
         </dom-repeat>
       </div>
-
-      <paper-button id="send" on-click="send">Prueba</paper-button>
-      <paper-button id="send" on-click="send">Prueba</paper-button>
     </paper-card>
   </template>
 
   <script>
     class ChatBot extends Polymer.Element {
-      static get is() { return 'chat-bot'; }
-      static get properties() {
-        return {
-          messages: {
-            type: Array,
-            value: []
-          },
-          nodes: {
-            type: Array,
-            value: []
-          }
-        };
-      }
-
-      ready() {
-        super.ready();
-        this.messages.push('Bienvenido, tendras una interacción con un chatbot');
-      } 
-
+    static get is() { return 'chat-bot'; }
+    static get properties() {
+      return {
+        nodes: {
+          type: Array,
+          value: []
+        }
+      };
     }
 
-    window.customElements.define(ChatBot.is, ChatBot);
+    ready() {
+      super.ready();
+      const newNode = new Node();
+      newNode.question = 'Bienvenido, esta es una interacción con un bot. ¿Aceptas?';
+      newNode.from = 'bot';
+      newNode.options.set('yes', new Node());
+      console.log(newNode);
+      this.nodes.push(newNode);  
+    } 
+
+  }
+
+  window.customElements.define(ChatBot.is, ChatBot);
   </script>
 </dom-module>
