@@ -50,6 +50,7 @@
 
       div.buttons{
         display: flex;
+        justify-content: space-around;
       }
     </style>
 
@@ -58,13 +59,16 @@
         <h1>I'm a bot</h1>
       </header>
       <div id="chat">
-        <dom-repeat items="[[nodes]]" as="node">
+        <dom-repeat items="[[messages]]" as="message">
           <template>
-            <user-message id="message" text="[[node.question]]" from="[[node.from]]"></user-message>
-            <div class="buttons">
-              <paper-button class="button" on-click="">Yes</paper-button>
-              <paper-button class="button" on-click="">No</paper-button>
-            </div>
+            <user-message id="message" text="[[message.question]]" from="[[message.from]]"></user-message>
+          </template>
+        </dom-repeat>
+      </div>
+      <div class="buttons">
+        <dom-repeat items="[[buttons]]" as="button">
+          <template>
+            <paper-button class="button" on-click="">[[button]]</paper-button>
           </template>
         </dom-repeat>
       </div>
@@ -78,19 +82,66 @@
       return {
         nodes: {
           type: Array,
+          value: [],
+          computed: '_loadNodes()'
+        },
+        messages: {
+          type: Array,
           value: []
+        },
+        buttons: {
+          type: Array,
+          value:[]
         }
       };
     }
 
-    ready() {
-      super.ready();
-      const newNode = new Polymer.Node();
-      newNode.question = 'Bienvenido, esta es una interacción con un bot. ¿Aceptas?';
-      newNode.from = 'bot';
-      newNode.options.set('yes', new Polymer.Node());
-      console.log(newNode);
-      this.nodes.push(newNode);
+    ready(){
+      super.ready()
+      //inicia todos los nodos
+      const bienvenida1 = new Polymer.Node();
+      const bienvenida2 = new Polymer.Node();
+      const ordenar = new Polymer.Node();
+      const confirmOrdenar = new Polymer.Node();
+      // set a las propiedades de bienvenida1
+      bienvenida1.question = "Hola! Yo soy un bot que te ayudará a ordenar tu comida. Te iré haciando preguntas y con los botones qu ete apareceran abajo, podras elegir la opción deseada. ¿Entendiste?";
+      bienvenida1.options.set('yes', ordenar);
+      bienvenida1.options.set('no', confirmOrdenar);
+      bienvenida1.level = 0;
+      bienvenida1.from = 'bot'
+      this.nodes.push(bienvenida1);
+      // set a las propiedades de ordenar
+      ordenar.question = "¿Que deseas ordenar?";
+      ordenar.options.set('nada', confirmOrdenar);
+      ordenar.level = 1;
+      ordenar.from = 'bot'
+      this.nodes.push(ordenar);
+      // set a las propiedades de confirmOrdenar
+      confirmOrdenar.question = "¿En verdad no gutas ordenar nada?";
+      confirmOrdenar.options.set('no ordenar', bienvenida1);
+      confirmOrdenar.options.set('si ordenar', ordenar);
+      confirmOrdenar.level = 1;
+      confirmOrdenar.from = 'bot'
+      this.nodes.push(confirmOrdenar);
+
+      console.log(this.nodes)
+      this.printMessage();
+      this.printButtons();
+
+    }
+
+    printMessage(){
+      const message = {
+        question: this.nodes[0].question,
+        from: this.nodes[0].from
+      }
+      this.messages.push(message)
+    }
+
+    printButtons(){
+      for(let key of this.nodes[0].options.keys()){
+        this.buttons.push(key)
+      }
     }
 
   }
