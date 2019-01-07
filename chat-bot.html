@@ -1,7 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../user-message/user-message.html">
 <script src="./models/Node.js"></script>
 
@@ -28,10 +27,17 @@
         margin-left: 5%;
         margin-right: 5%;
       }
-      paper-button.button{
+      paper-button{
         background-color: var(--paper-green-500);
         color: white;
         margin-bottom: 2px;
+        border: transparent;
+        border-radius: 5px;
+        font-size: 16px;
+        padding: 5px;
+        width: 100px;
+        height: 50px;
+        text-align: center;
       }
       header{
         background-color: #0288D1;
@@ -39,10 +45,10 @@
         padding-left: 30px;
       }
       div#chat{
-        display: flex;
-        flex-direction: column;
+        overflow: auto;
         align-content: flex-end;
         height: 400px;
+        max-height: 400px;
       }
       user-message{
         padding: 5px;
@@ -50,6 +56,7 @@
 
       div.buttons{
         display: flex;
+        margin-top: 5%;
         justify-content: space-around;
       }
     </style>
@@ -68,7 +75,7 @@
       <div class="buttons">
         <dom-repeat items="[[buttons]]" as="button">
           <template>
-            <paper-button class="button" on-click="">[[button]]</paper-button>
+            <paper-button data-opcion="[[button]]" id="[[button]]" on-tap="getOptionSetected">[[button]]</paper-button>
           </template>
         </dom-repeat>
       </div>
@@ -92,6 +99,14 @@
         buttons: {
           type: Array,
           value:[]
+        },
+        currentNode: {
+          type:Array,
+          value: []
+        }, 
+        input: {
+          type: String,
+          value: ''
         }
       };
     }
@@ -104,12 +119,19 @@
       const ordenar = new Polymer.Node();
       const confirmOrdenar = new Polymer.Node();
       // set a las propiedades de bienvenida1
-      bienvenida1.question = "Hola! Yo soy un bot que te ayudará a ordenar tu comida. Te iré haciando preguntas y con los botones qu ete apareceran abajo, podras elegir la opción deseada. ¿Entendiste?";
+      bienvenida1.question = "Hola! Yo soy un bot que te ayudará a ordenar tu comida. Te iré haciando preguntas y con los botones que te apareceran abajo, podras elegir la opción deseada. ¿Entendiste?";
       bienvenida1.options.set('yes', ordenar);
-      bienvenida1.options.set('no', confirmOrdenar);
+      bienvenida1.options.set('no', bienvenida2);
       bienvenida1.level = 0;
       bienvenida1.from = 'bot'
       this.nodes.push(bienvenida1);
+      // set a las propiedades de bienvenida2
+      bienvenida2.question = "Soy un bot que te ayudará a elefir entre las bastas opciones que hay. Voy a ir poniendo preguntas en la pantalla y con los botones verdes de la parte superior tu iras contestastando a dichas preguntas. ¿Entendiste?";
+      bienvenida2.options.set('yes', ordenar);
+      bienvenida2.options.set('no', bienvenida1);
+      bienvenida2.level = 0;
+      bienvenida2.from = 'bot'
+      this.nodes.push(bienvenida2);
       // set a las propiedades de ordenar
       ordenar.question = "¿Que deseas ordenar?";
       ordenar.options.set('nada', confirmOrdenar);
@@ -124,26 +146,53 @@
       confirmOrdenar.from = 'bot'
       this.nodes.push(confirmOrdenar);
 
-      console.log(this.nodes)
-      this.printMessage();
-      this.printButtons();
+      this.set('currentNode', bienvenida1);
+      this.printMessage(this.currentNode);
+      this.printButtons(this.currentNode);
 
     }
 
-    printMessage(){
+    printMessage(node){
+      const messages = this.messages;
+      const message = [{
+        question: node.question,
+        from: node.from
+      }]
+      this.messages = [... messages, ...message]
+    }
+
+    userMessage(data){
+      const messages = this.messages;
+      const message = [data];
+      this.messages = [...messages, ...message]
+    }
+
+    printButtons(node){
+      let buttons = [];
+      for(let key of node.options.keys()){
+        buttons.push(key)
+      }
+      this.set('buttons', buttons);
+      console.log(this.buttons)
+    }
+
+    getOptionSetected(event){
+      const optionSelected = event.model.__data.button;
       const message = {
-        question: this.nodes[0].question,
-        from: this.nodes[0].from
+        question: optionSelected,
+        from: 'user'
       }
-      this.messages.push(message)
+      this.userMessage(message)
+      this.getNodeToProced(optionSelected);
     }
 
-    printButtons(){
-      for(let key of this.nodes[0].options.keys()){
-        this.buttons.push(key)
-      }
+    getNodeToProced(option){
+      const netxNode = this.currentNode.options.get(option);
+      this.printMessage(netxNode);
+      this.printButtons(netxNode);
+      this.set('currentNode', netxNode);
+      console.log(this.currentNode);
     }
-
   }
 
   window.customElements.define(ChatBot.is, ChatBot);

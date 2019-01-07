@@ -7,11 +7,6 @@
       this._level = null;
       this._repeats = 0;
       this._from = null;
-      this._lambda = (input) =>{
-        this._repeats ++;
-        return this._options.get(input);
-
-      }
     }
 
     get question(){
