@@ -1,6 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-card/paper-card.html">
-<link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../user-message/user-message.html">
 
 <dom-module id="chat-bot">
@@ -16,35 +15,44 @@
         flex-direction: column;
         margin: 30px;
       }
-      paper-button{
-        background-color: var(--paper-green-500);
-        color: white;
+      button{
+        background-color: var(--button-background-color, #43A047);
+        color: var(--button-letter-color, white);
+        text-align: center;
         margin-bottom: 2px;
         border: transparent;
         border-radius: 5px;
         font-size: 16px;
         padding: 5px;
-        width: 100px;
+        width: 150px;
         height: 50px;
-        text-align: center;
+        text-transform: uppercase;
+        @apply --button-styles
+      }
+      button:hover {
+        transform: scale(1.1);
+        cursor: pointer;
       }
       header{
-        background-color: #0288D1;
-        color: white;
         padding-left: 30px;
+        color: var(--header-letter-color, white);
+        background-color: var(--background-header, #00897B);
+        @apply --header-styles
       }
       div#chat{
         overflow: auto;
         height: 100%;
         max-height: 400px;
+        background-color: var(--background-chat-color, white);
+        @apply --chat-container-style;
       }
       user-message{
         padding: 5px;
       }
-
       div.buttons{
         display: flex;
         justify-content: space-around;
+        margin-top: 2%;
       }
     </style>
 
@@ -62,7 +70,7 @@
       <div class="buttons">
         <dom-repeat items="[[buttons]]" as="button">
           <template>
-            <paper-button data-opcion="[[button]]" id="[[button]]" on-tap="getOptionSetected">[[button]]</paper-button>
+            <button data-opcion="[[button]]" id="[[button]]" on-click="getOptionSetected">[[button]]</button>
           </template>
         </dom-repeat>
       </div>
@@ -76,8 +84,7 @@
       return {
         nodes: {
           type: Array,
-          value: [],
-          computed: '_loadNodes()'
+          value: []
         },
         messages: {
           type: Array,
@@ -91,21 +98,20 @@
         currentNode: {
           type:Array,
           value: []
-        }, 
-        input: {
-          type: String,
-          value: ''
         }
       };
     }
 
     ready(){
       super.ready()
-
       this.set('currentNode', bienvenida1);
       this.printMessage(this.currentNode);
       this.printButtons(this.currentNode);
+    }
 
+    connectedCallback(){
+      super.connectedCallback();
+      console.log(this.nodes)
     }
 
     printMessage(node){
@@ -137,8 +143,14 @@
         question: optionSelected,
         from: 'user'
       }
+      this.dispatchEvent(new CustomEvent("button-clicked",{
+        bubbles:false,
+        composed:false,
+        detail:message
+      }));
       this.userMessage(message)
       this.getNodeToProced(optionSelected);
+      console.log(this.nodes);
     }
 
     getNodeToProced(option){

@@ -8,43 +8,28 @@
 
     <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
-
     <link rel="import" href="../chat-bot.html">
   </head>
   <body>
 
-    <test-fixture id="BasicTestFixture">
+    <test-fixture id="button-changes">
       <template>
         <chat-bot></chat-bot>
       </template>
     </test-fixture>
 
-    <test-fixture id="ChangedPropertyTestFixture">
-      <template>
-        <chat-bot prop1="new-prop1"></chat-bot>
-      </template>
-    </test-fixture>
+  
 
     <script>
       suite('chat-bot', () => {
-
-        test('instantiating the element with default properties works', () => {
-          const element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'chat-bot');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello chat-bot!');
+        test('button data changes', (done) => {
+          const chatBot = fixture('button-changes');
+          chatBot.addEventListener("button-clicked",(event)=>{
+            assert.equal(event.detail.question,!"");
+            done();
+          });
+          chatBot.getOptionSelected();
         });
-
-        test('setting a property on the element works', () => {
-          // Create a test fixture
-          const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
-          const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-        });
-
       });
     </script>
 
