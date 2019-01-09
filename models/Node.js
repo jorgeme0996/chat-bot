@@ -4,6 +4,15 @@
       this._question = null;
       this._options = new Map;
       this._from = null;
+      this._isFinal = false;
+    }
+
+    get isFinal(){
+      return this._isFinal;
+    }
+
+    set isFinal(data){
+      this._isFinal = data;
     }
 
     get question(){

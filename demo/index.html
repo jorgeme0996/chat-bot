@@ -16,7 +16,6 @@
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-        
       </style>
     </custom-style>
   </head>
@@ -27,13 +26,13 @@
         <template>
           <dom-bind>
             <template>
-              <chat-bot nodes="[[nodes]]"></chat-bot>
+              <chat-bot nodes="[[nodes]]" initialNode="[[initialNode]]"></chat-bot>
             </template>
           </dom-bind>
 
           <script>
             //inicia todos los nodos
-            const bienvenida1 = new Polymer.Node();
+            const node1 = new Polymer.Node();
             const bienvenida2 = new Polymer.Node();
             const ordenar = new Polymer.Node();
             const confirmOrdenar = new Polymer.Node();
@@ -44,15 +43,15 @@
             const hamburguesa = new Polymer.Node();
             const chilaquiles = new Polymer.Node();
             const sopa = new Polymer.Node();
-            // set a las propiedades de bienvenida1
-            bienvenida1.question = "Hola! Yo soy un bot que te ayudará a ordenar tu comida. Te iré haciando preguntas y con los botones que te apareceran abajo, podras elegir la opción deseada. ¿Entendiste?";
-            bienvenida1.options.set('si', ordenar);
-            bienvenida1.options.set('no', bienvenida2);
-            bienvenida1.from = 'bot'
+            // set a las propiedades de node1
+            node1.question = "Hola! Yo soy un bot que te ayudará a ordenar tu comida. Te iré haciando preguntas y con los botones que te apareceran abajo, podras elegir la opción deseada. ¿Entendiste?";
+            node1.options.set('si', ordenar);
+            node1.options.set('no', bienvenida2);
+            node1.from = 'bot'
             // set a las propiedades de bienvenida2
             bienvenida2.question = "Soy un bot que te ayudará a elegir entre las bastas opciones que hay. Voy a ir poniendo preguntas en la pantalla y con los botones verdes de la parte superior tu iras contestastando a dichas preguntas. ¿Entendiste?";
             bienvenida2.options.set('si', ordenar);
-            bienvenida2.options.set('no', bienvenida1);
+            bienvenida2.options.set('no', node1);
             bienvenida2.from = 'bot'
             // set a las propiedades de ordenar
             ordenar.question = "¿Que deseas ordenar?";
@@ -62,7 +61,7 @@
             ordenar.from = 'bot'
             // set a las propiedades de confirmOrdenar
             confirmOrdenar.question = "¿En verdad no gutas ordenar nada?";
-            confirmOrdenar.options.set('no ordenar', bienvenida1);
+            confirmOrdenar.options.set('no ordenar', node1);
             confirmOrdenar.options.set('si ordenar', ordenar);
             confirmOrdenar.from = 'bot'
             // set propiedades de comida
@@ -76,9 +75,30 @@
             bebida.options.set('cerveza', cerveza);
             bebida.options.set('agua', agua);
             bebida.from = 'bot';
+            // set propiedades de hamburguesa
+            hamburguesa.question = "Muy bien, en un momento traeremos tu hamburguesa. Gracias por tu preferencia";
+            hamburguesa.isFinal = true
+            hamburguesa.from = 'bot';
+            // set propiedades de sopa
+            sopa.question = "Muy bien, en un momento traeremos tu sopa. Gracias por tu preferencia";
+            sopa.isFinal = true
+            sopa.from = 'bot';
+            // set propiedades de chilaquiles
+            chilaquiles.question = "Muy bien, en un momento traeremos tu chilaquiles. Gracias por tu preferencia";
+            chilaquiles.isFinal = true
+            chilaquiles.from = 'bot';
+            // set propiedades de agua
+            agua.question = "Muy bien, en un momento traeremos tu agua. Gracias por tu preferencia";
+            agua.isFinal = true
+            agua.from = 'bot';
+            // set propiedades de cerveza
+            cerveza.question = "Muy bien, en un momento traeremos tu cerveza. Gracias por tu preferencia";
+            cerveza.isFinal = true
+            cerveza.from = 'bot';
 
-            const demo = document.querySelector('dom-bind');
-            demo.nodes = [bienvenida1, bienvenida2, ordenar, confirmOrdenar, hamburguesa, sopa, comida, chilaquiles]
+            const element = document.querySelector('dom-bind');
+            element.nodes = [node1, bienvenida2, ordenar, confirmOrdenar, hamburguesa, sopa, comida, chilaquiles];
+            element.initialNode = [node1];
           </script>
 
         </template>
