@@ -1,0 +1,34 @@
+{
+  "name": "chat-bot",
+  "version": "1.0.0",
+  "description": "mini web music player",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/wct",
+    "coverage": "open coverage/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jorgeme0996/chat-bot.git"
+  },
+  "keywords": [
+    "polymer2",
+    "element",
+    "music",
+    "player"
+  ],
+  "author": "@jorgeme0996",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorgeme0996/chat-bot/issues"
+  },
+  "homepage": "https://github.com/jorgeme0996/chat-bot#readme",
+  "devDependencies": {
+    "@polymer/iron-component-page": "^4.0.1",
+    "web-component-tester": "git+https://github.com/t2ym/web-component-tester.git#wct6-plugin",
+    "web-component-tester-istanbul": "git+https://github.com/t2ym/web-component-tester-istanbul.git#0.10.1-wct6.8"
+  }
+}

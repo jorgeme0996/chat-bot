@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jorgeme0996/chat-bot.svg?branch=master)](https://travis-ci.org/jorgeme0996/chat-bot)
+
 # \<chat-bot\>
 
 ```html
