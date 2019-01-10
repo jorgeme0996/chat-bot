@@ -41,7 +41,7 @@
           assert.deepEqual(element.currentNode, fakeOption);
         })
 
-        test('Spy printMessages', () => {
+        test('Spy printButtons', () => {
           const element = fixture('chat-bot');
           const fakeNode = new Polymer.Node();
           const fakeOption = new Polymer.Node();
@@ -59,6 +59,27 @@
           element.printButtons(fakeNode);
 
           assert.strictEqual(element._printButtonsObserver(), true);
+          
+        })
+
+        test('Spy printMessages', () => {
+          const element = fixture('chat-bot');
+          const fakeNode = new Polymer.Node();
+          const fakeOption = new Polymer.Node();
+          
+          // set a las propiedades de fakeNode
+          fakeNode.question = "Texto fake";
+          fakeNode.options.set('si', fakeOption);
+          fakeNode.from = 'bot'
+          // set a las propiedades de fakeOprion
+          fakeOption.question = "Option Fake";
+
+          const fakeNodes = [fakeNode, fakeOption]
+          element.set('nodes', fakeNodes);
+          
+          element.printMessage(fakeNode);
+
+          assert.strictEqual(element._printMessageObserver(), true);
           
         })
       });

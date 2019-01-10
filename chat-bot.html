@@ -118,7 +118,8 @@
         },
         messages: {
           type: Array,
-          value: []
+          value: [],
+          observer: '_printMessageObserver'
         },
         buttons: {
           type: Array,
@@ -152,6 +153,10 @@
         from: node.from
       }]
       this.messages = [... messages, ...message];
+    }
+
+    _printMessageObserver(){
+      return true;
     }
 
     userMessage(data){
