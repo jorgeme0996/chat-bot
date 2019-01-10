@@ -18,16 +18,19 @@ $ bower install
 ## CSS variables
 
 ### Header
-|-----------------------|---------------------------------------|
-| --header-letter-color | Change the letter color of the header |
-| --background-header   | Change the background color of the header |
+
+| --header-letter-color 	| Change the letter color of the header     	|
+|-----------------------	|-------------------------------------------	|
+| --background-header   	| Change the background color of the header 	|
 
 
 ### Chat Conteiner
 
-| --background-chat-color | Change the background color of chat container|
+| --background-chat-color 	| Change the background color of chat container 	|
+|-------------------------	|-----------------------------------------------	|
 
 ### Buttons 
 
-| --button-background-color |Change the color of buttons|
+| --button-background-color |Change the color of buttons                 |
+|-----------------------	|--------------------------------------------|
 | --button-letter-color     | Change the letters color inside the buttons|
