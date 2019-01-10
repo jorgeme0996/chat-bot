@@ -20,9 +20,8 @@ $ bower install
 ### Header
 |-----------------------|---------------------------------------|
 | --header-letter-color | Change the letter color of the header |
-|-----------------------|---------------------------------------|
 | --background-header   | Change the background color of the header |
-|-----------------------|-------------------------------------------|
+
 
 ### Chat Conteiner
 
