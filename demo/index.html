@@ -24,7 +24,7 @@
       <h3>Basic chat-bot demo</h3>
       <demo-snippet>
         <template>
-          <dom-bind>
+          <dom-bind id=app>
             <template>
               <chat-bot nodes="[[nodes]]"></chat-bot>
             </template>
@@ -96,7 +96,7 @@
             cerveza.isFinal = true
             cerveza.from = 'bot';
 
-            const element = document.querySelector('dom-bind');
+            const element = document.querySelector('#app');
             element.nodes = [node1, bienvenida2, ordenar, confirmOrdenar, hamburguesa, sopa, comida, chilaquiles];
           </script>
 
