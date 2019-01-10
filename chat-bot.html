@@ -59,7 +59,7 @@
 
     <paper-card>
       <header>
-        <h1>I'm a bot</h1>
+        <h1>[[title]]</h1>
       </header>
       <div id="chat">
         <dom-repeat items="[[messages]]" as="message">
@@ -79,7 +79,35 @@
   </template>
 
   <script>
-    class ChatBot extends Polymer.Element {
+
+/**
+* `Chat-bot` is a chat-bot. where the user is able to pass an array of nodes and the bot is going to interact with that nodes.
+* # \<chat-bot\>
+
+*## CSS variables
+
+*### Header
+
+*| --header-letter-color 	| Change the letter color of the header     	|
+*|-----------------------	|-------------------------------------------	|
+*| --background-header   	| Change the background color of the header 	|
+
+
+*### Chat Conteiner
+
+*| --background-chat-color 	| Change the background color of chat container 	|
+*|-------------------------	|-----------------------------------------------	|
+
+*### Buttons 
+
+*| --button-background-color |Change the color of buttons                 |
+*|-----------------------	|--------------------------------------------|
+*| --button-letter-color     | Change the letters color inside the buttons| 
+* @customElement
+* @polymer
+* @demo demo/index.html
+*/
+  class ChatBot extends Polymer.Element {
     static get is() { return 'chat-bot'; }
     static get properties() {
       return {
@@ -94,11 +122,16 @@
         },
         buttons: {
           type: Array,
-          value:[]
+          value:[],
+          observer: '_printButtonsObserver'
         },
         currentNode: {
           type: Node,
           value: () => {return new Polymer.Node();}
+        },
+        title: {
+          type: String,
+          value: ''
         }
       };
     }
@@ -133,6 +166,10 @@
         buttons.push(key)
       }
       this.set('buttons', buttons);
+    }
+
+    _printButtonsObserver(){
+      return true;
     }
 
     getOptionSetected(event){

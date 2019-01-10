@@ -21,7 +21,27 @@
 
     <script>
       suite('chat-bot', () => {
-        test('Spy printMessage', () => {
+        test('Spy getNodeToProced', () => {
+          const element = fixture('chat-bot');
+          const fakeNode = new Polymer.Node();
+          const fakeOption = new Polymer.Node();
+          
+          // set a las propiedades de fakeNode
+          fakeNode.question = "Texto fake";
+          fakeNode.options.set('si', fakeOption);
+          fakeNode.from = 'bot'
+          // set a las propiedades de fakeOprion
+          fakeOption.question = "Option Fake";
+
+          const fakeNodes = [fakeNode, fakeOption]
+          element.set('nodes', fakeNodes);
+
+          assert.deepEqual(element.currentNode, fakeNode);
+          element.getNodeToProced('si');
+          assert.deepEqual(element.currentNode, fakeOption);
+        })
+
+        test('Spy printMessages', () => {
           const element = fixture('chat-bot');
           const fakeNode = new Polymer.Node();
           const fakeOption = new Polymer.Node();
@@ -36,15 +56,10 @@
           const fakeNodes = [fakeNode, fakeOption]
           element.set('nodes', fakeNodes);
           
-          element.printMessage = (node) => {};
-          element.printButtons = (node) => {};
-          const spyPrintMessage = sinon.spy(element, 'printMessage');
-          const spyPrintButtons = sinon.spy(element, 'printButtons')
-          assert.deepEqual(element.currentNode, fakeNode);
-          element.getNodeToProced('si');
-          assert.deepEqual(element.currentNode, fakeOption);
-          assert.isTrue(spyPrintMessage.calledOnce);
-          assert.isTrue(spyPrintButtons.calledOnce);
+          element.printButtons(fakeNode);
+
+          assert.strictEqual(element._printButtonsObserver(), true);
+          
         })
       });
     </script>
