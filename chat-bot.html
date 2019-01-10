@@ -99,10 +99,6 @@
         currentNode: {
           type: Node,
           value: () => {return new Polymer.Node();}
-        }, 
-        initialNode: {
-          type: Array,
-          value: []
         }
       };
     }
@@ -110,8 +106,10 @@
     _setInitialNode(){
       const initialNode = this.nodes[0];
       this.set('currentNode', initialNode);
-      this.printMessage(this.currentNode);
-      this.printButtons(this.currentNode);
+      if(this.currentNode){
+        this.printMessage(this.currentNode);
+        this.printButtons(this.currentNode);
+      }
     }
 
     printMessage(node){

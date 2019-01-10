@@ -26,7 +26,7 @@
         <template>
           <dom-bind>
             <template>
-              <chat-bot nodes="[[nodes]]" initialNode="[[initialNode]]"></chat-bot>
+              <chat-bot nodes="[[nodes]]"></chat-bot>
             </template>
           </dom-bind>
 
@@ -98,7 +98,6 @@
 
             const element = document.querySelector('dom-bind');
             element.nodes = [node1, bienvenida2, ordenar, confirmOrdenar, hamburguesa, sopa, comida, chilaquiles];
-            element.initialNode = [node1];
           </script>
 
         </template>
