@@ -1,21 +1,22 @@
 # \<chat-bot\>
 
-A simple chatbot component
-
 ## Install the Polymer-CLI
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
-```
-$ polymer serve
+```html
+<chat-bot></chat-bot>
 ```
 
-## Running Tests
+## Install bower
+npm i bower
+
+## Run bower install
 
 ```
-$ polymer test
+$ bower install
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+| Properties | Value  | Description                                                                                                                                                                                                              |
+|------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| question   | String | This is the text of the node that will be print Example:  const exampleNode = new Polymer.Node; exampleNode.question = 'Hola desde exampleNode';  console.log(exampleNode) //Node{question: 'Hola desde exampleNode'}... |
+| options    | Map    | [{option => reference to Node}, {key => reference to Node}] Example:  [{yes => Node2}, {no => Node3}]                                                                                                                    |
+|            |        |                                                                                                                                                                                                                          |
