@@ -98,7 +98,7 @@
         },
         currentNode: {
           type: Node,
-          value: new Polymer.Node
+          value: () => {return new Polymer.Node();}
         }, 
         initialNode: {
           type: Array,
@@ -107,15 +107,11 @@
       };
     }
 
-    ready(){
-      super.ready();
-      this.printMessage(this.currentNode);
-      this.printButtons(this.currentNode);
-    }
-
     _setInitialNode(){
       const initialNode = this.nodes[0];
       this.set('currentNode', initialNode);
+      this.printMessage(this.currentNode);
+      this.printButtons(this.currentNode);
     }
 
     printMessage(node){
@@ -152,10 +148,10 @@
     }
 
     getNodeToProced(option){
-      const netxNode = this.currentNode.options.get(option);
-      this.printMessage(netxNode);
-      this.printButtons(netxNode);
-      this.set('currentNode', netxNode);
+      const nextNode = this.currentNode.options.get(option);
+      this.printMessage(nextNode);
+      this.printButtons(nextNode);
+      this.set('currentNode', nextNode);
     }
   }
 

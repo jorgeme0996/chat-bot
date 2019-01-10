@@ -1,7 +1,5 @@
 # \<chat-bot\>
 
-## Install the Polymer-CLI
-
 ```html
 <chat-bot></chat-bot>
 ```
@@ -15,7 +13,9 @@ npm i bower
 $ bower install
 ```
 
-|Properties     | Value     | Description                                           |
-|-----------    |-----------|-------------------------------------------------------|
-|question       |Satring    |This id the text of the node that woild be shown       |
-|options        |Map        |This are the options that the bot will show on buttons |
+|Properties     | Value     | Description                                                            |
+|-----------    |-----------|------------------------------------------------------------------------|
+|question       |Satring    |This id the text of the node that would be shown.                       |
+|options        |Map        |This are the options that the bot will show on buttons.                 |
+|from           |String     |This always is going to be bot                                          | 
+|isFinal        |Boolean    |Is going to de false for defaul. Only true when your node is a Final reaponce | 

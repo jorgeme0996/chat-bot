@@ -2,7 +2,7 @@
   class Node {
     constructor(){
       this._question = null;
-      this._options = new Map;
+      this._options = new Map();
       this._from = null;
       this._isFinal = false;
     }
