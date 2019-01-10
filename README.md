@@ -15,14 +15,20 @@ npm i bower
 $ bower install
 ```
 
-## Class Polymer.Node
+## CSS variables
 
-This class is declare in models directory.
+### Header
+|-----------------------|---------------------------------------|
+| --header-letter-color | Change the letter color of the header |
+|-----------------------|---------------------------------------|
+| --background-header   | Change the background color of the header |
+|-----------------------|-------------------------------------------|
 
-|Propertie    | Value     | Description                                                            |
-|-----------    |-----------|------------------------------------------------------------------------|
-|question       |Satring    |This id the text of the node that would be shown.                       |
-|options        |Map        |This are the options that the bot will show on buttons. and have the reference to the  *Node* selected |
-|from           |String     |This always is going to be bot                                          | 
-|isFinal        |Boolean    |Is going to be false for defaul. Only true when your node is a Final response | 
-|
+### Chat Conteiner
+
+| --background-chat-color | Change the background color of chat container|
+
+### Buttons 
+
+| --button-background-color |Change the color of buttons|
+| --button-letter-color     | Change the letters color inside the buttons|
