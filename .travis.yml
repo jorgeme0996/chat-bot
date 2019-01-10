@@ -5,7 +5,6 @@ before_script:
   - polymer install
 node_js: stable
 addons:
-  firefox: latest
   apt:
     sources:
       - google-chrome

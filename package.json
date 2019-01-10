@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/.bin/wct",
+    "test": "./node_modules/.bin/wct -l chrome",
     "coverage": "open coverage/lcov-report/index.html"
   },
   "repository": {
@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/jorgeme0996/chat-bot#readme",
   "devDependencies": {
-    "@polymer/iron-component-page": "^4.0.1",
     "web-component-tester": "git+https://github.com/t2ym/web-component-tester.git#wct6-plugin",
     "web-component-tester-istanbul": "git+https://github.com/t2ym/web-component-tester-istanbul.git#0.10.1-wct6.8"
   }
