@@ -9,14 +9,23 @@
       :host {
         display: block;
       }
-      paper-card{
+
+      paper-card {
         height: 550px;
         padding: 10px;
         display: flex;
         flex-direction: column;
         margin: 30px;
+        height: auto;
+        min-height: 550px;
       }
-      button{
+
+      paper-card {
+        padding: 0px;
+        border-radius: 10px 10px 0px 0px;
+      }
+
+      button {
         background-color: var(--button-background-color, #43A047);
         color: var(--button-letter-color, white);
         text-align: center;
@@ -30,30 +39,37 @@
         text-transform: uppercase;
         @apply --button-styles
       }
+
       button:hover {
         transform: scale(1.1);
         cursor: pointer;
       }
-      header{
+
+      header {
         padding-left: 30px;
         color: var(--header-letter-color, white);
         background-color: var(--background-header, #00897B);
         @apply --header-styles
       }
-      div#chat{
+
+      div#chat {
         overflow: auto;
-        height: 100%;
-        max-height: 400px;
+        height: 400px;
         background-color: var(--background-chat-color, white);
         @apply --chat-container-style;
       }
-      user-message{
+
+      user-message {
         padding: 5px;
       }
-      div.buttons{
+
+      div.buttons {
         display: flex;
         justify-content: space-around;
         margin-top: 2%;
+        border-top: 2px solid #8666ff;
+        padding-top: 10px;
+        flex-wrap: wrap;
       }
     </style>
 
